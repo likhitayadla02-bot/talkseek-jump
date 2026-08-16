@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Search every word of your recorded talks and jump straight to that moment in the video.",
+          "Upload workshops, lectures and panels, get timestamped transcripts, and jump straight to the moment any phrase was spoken.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

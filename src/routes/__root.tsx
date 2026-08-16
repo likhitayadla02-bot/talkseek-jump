@@ -81,10 +81,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Search every word of your recorded talks and jump straight to that moment in the video.",
+          "Upload workshops, lectures and panels, get timestamped transcripts, and jump straight to the moment any phrase was spoken.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "TalkFind — Search inside recorded talks" },
+      { name: "twitter:title", content: "TalkFind — Search inside recorded talks" },
+      { property: "og:description", content: "Upload workshops, lectures and panels, get timestamped transcripts, and jump straight to the moment any phrase was spoken." },
+      { name: "twitter:description", content: "Upload workshops, lectures and panels, get timestamped transcripts, and jump straight to the moment any phrase was spoken." },
     ],
     links: [
       {
