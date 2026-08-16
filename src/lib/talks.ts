@@ -6,6 +6,7 @@ export type Talk = {
   speaker: string;
   duration: string;
   videoUrl: string;
+  youtubeId?: string;
   createdAt: number;
   cues: Cue[];
 };
@@ -104,6 +105,22 @@ export function searchTalks(talks: Talk[], query: string): SearchHit[] {
     });
   }
   return hits;
+}
+
+/** Extracts a YouTube video id from any common URL shape. */
+export function parseYouTubeId(url: string): string | null {
+  const trimmed = url.trim();
+  if (!trimmed) return null;
+  const patterns = [
+    /(?:youtube\.com\/watch\?(?:.*&)?v=)([\w-]{11})/,
+    /(?:youtu\.be\/)([\w-]{11})/,
+    /(?:youtube\.com\/(?:embed|shorts|live)\/)([\w-]{11})/,
+  ];
+  for (const re of patterns) {
+    const m = trimmed.match(re);
+    if (m?.[1]) return m[1];
+  }
+  return /^[\w-]{11}$/.test(trimmed) ? trimmed : null;
 }
 
 /** Mock transcription: produces plausible cues for an uploaded file. */
