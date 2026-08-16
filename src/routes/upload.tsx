@@ -105,7 +105,7 @@ function UploadPage() {
           />
         </div>
 
-        <Button type="submit" variant="brand" size="lg" disabled={status === "working"} className="w-full">
+        <Button type="submit" size="lg" disabled={status === "working"} className="w-full">
           {status === "working" ? "Transcribing…" : "Upload & transcribe"}
         </Button>
         <p className="text-xs text-muted-foreground">

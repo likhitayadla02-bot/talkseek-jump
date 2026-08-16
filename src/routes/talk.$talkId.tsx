@@ -4,7 +4,7 @@ import { formatTime, getTalk, type Talk } from "@/lib/talks";
 
 export const Route = createFileRoute("/talk/$talkId")({
   validateSearch: (search: Record<string, unknown>) => ({
-    t: typeof search.t === "number" ? search.t : Number(search.t) || 0,
+    t: Number(search["t"]) || 0,
   }),
   head: () => ({
     meta: [

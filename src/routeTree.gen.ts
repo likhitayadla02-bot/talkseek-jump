@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as UploadRouteImport } from './routes/upload'
+import { Route as TalkTalkIdRouteImport } from './routes/talk.$talkId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const UploadRoute = UploadRouteImport.update({
+  id: '/upload',
+  path: '/upload',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TalkTalkIdRoute = TalkTalkIdRouteImport.update({
+  id: '/talk/$talkId',
+  path: '/talk/$talkId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/upload': typeof UploadRoute
+  '/talk/$talkId': typeof TalkTalkIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/upload': typeof UploadRoute
+  '/talk/$talkId': typeof TalkTalkIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/upload': typeof UploadRoute
+  '/talk/$talkId': typeof TalkTalkIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/upload' | '/talk/$talkId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/upload' | '/talk/$talkId'
+  id: '__root__' | '/' | '/upload' | '/talk/$talkId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  UploadRoute: typeof UploadRoute
+  TalkTalkIdRoute: typeof TalkTalkIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/upload': {
+      id: '/upload'
+      path: '/upload'
+      fullPath: '/upload'
+      preLoaderRoute: typeof UploadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/talk/$talkId': {
+      id: '/talk/$talkId'
+      path: '/talk/$talkId'
+      fullPath: '/talk/$talkId'
+      preLoaderRoute: typeof TalkTalkIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  UploadRoute: UploadRoute,
+  TalkTalkIdRoute: TalkTalkIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
