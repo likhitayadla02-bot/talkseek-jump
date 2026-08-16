@@ -77,19 +77,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "TalkFind — Search inside recorded talks" },
+      {
+        name: "description",
+        content:
+          "Search every word of your recorded talks and jump straight to that moment in the video.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
+      },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600&display=swap",
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
@@ -119,8 +125,25 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div className="min-h-screen font-sans">
+        <header className="border-b border-border bg-primary">
+          <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+            <Link to="/" className="font-display text-lg font-semibold text-primary-foreground">
+              Talk<span className="text-accent">Find</span>
+            </Link>
+            <div className="flex items-center gap-6 text-sm text-primary-foreground/70">
+              <Link to="/" className="transition-colors hover:text-accent">
+                Library
+              </Link>
+              <Link to="/upload" className="transition-colors hover:text-accent">
+                Upload
+              </Link>
+            </div>
+          </nav>
+        </header>
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+      </div>
     </QueryClientProvider>
   );
 }
