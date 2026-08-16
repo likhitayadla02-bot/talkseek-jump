@@ -71,7 +71,7 @@ function TalkPage() {
       </p>
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[1.6fr_1fr]">
-        <div className="overflow-hidden rounded-2xl border border-border bg-primary shadow-lg">
+        <div className="self-start overflow-hidden rounded-2xl border border-border bg-primary shadow-lg">
           <video
             ref={videoRef}
             src={talk.videoUrl}
