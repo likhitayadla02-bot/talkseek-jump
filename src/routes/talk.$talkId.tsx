@@ -85,14 +85,25 @@ function TalkPage() {
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[1.6fr_1fr]">
         <div className="self-start overflow-hidden rounded-2xl border border-border bg-primary shadow-lg">
-          <video
-            ref={videoRef}
-            src={talk.videoUrl}
-            controls
-            playsInline
-            className="aspect-video w-full bg-primary"
-            onTimeUpdate={(e) => setCurrent(e.currentTarget.currentTime)}
-          />
+          {talk.youtubeId ? (
+            <iframe
+              ref={frameRef}
+              title={talk.title}
+              src={`https://www.youtube-nocookie.com/embed/${talk.youtubeId}?enablejsapi=1&start=${Math.floor(t)}&rel=0`}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture"
+              allowFullScreen
+              className="aspect-video w-full border-0"
+            />
+          ) : (
+            <video
+              ref={videoRef}
+              src={talk.videoUrl}
+              controls
+              playsInline
+              className="aspect-video w-full bg-primary"
+              onTimeUpdate={(e) => setCurrent(e.currentTarget.currentTime)}
+            />
+          )}
         </div>
 
         <div className="flex max-h-[70vh] flex-col rounded-2xl border border-border bg-card">
