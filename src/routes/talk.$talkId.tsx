@@ -33,6 +33,7 @@ function TalkPage() {
   const [ready, setReady] = useState(false);
   const [current, setCurrent] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const frameRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
     setTalk(getTalk(talkId));
@@ -40,6 +41,18 @@ function TalkPage() {
   }, [talkId]);
 
   const seek = (seconds: number) => {
+    if (frameRef.current?.contentWindow) {
+      setCurrent(seconds);
+      frameRef.current.contentWindow.postMessage(
+        JSON.stringify({ event: "command", func: "seekTo", args: [seconds, true] }),
+        "*",
+      );
+      frameRef.current.contentWindow.postMessage(
+        JSON.stringify({ event: "command", func: "playVideo", args: [] }),
+        "*",
+      );
+      return;
+    }
     const v = videoRef.current;
     if (!v) return;
     v.currentTime = seconds;
