@@ -125,8 +125,25 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div className="min-h-screen font-sans">
+        <header className="border-b border-border bg-primary">
+          <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+            <Link to="/" className="font-display text-lg font-semibold text-primary-foreground">
+              Talk<span className="text-accent">Find</span>
+            </Link>
+            <div className="flex items-center gap-6 text-sm text-primary-foreground/70">
+              <Link to="/" className="transition-colors hover:text-accent">
+                Library
+              </Link>
+              <Link to="/upload" className="transition-colors hover:text-accent">
+                Upload
+              </Link>
+            </div>
+          </nav>
+        </header>
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+      </div>
     </QueryClientProvider>
   );
 }
